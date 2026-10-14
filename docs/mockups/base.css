@@ -1,0 +1,13 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #1b1b1b; color: #e6e6e6; font: 14px/1.4 -apple-system, "Inter", "Helvetica Neue", sans-serif; -webkit-font-smoothing: antialiased; }
+.mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; color: #a3a3a3; font-size: 13px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.blue { background: #3b82f6; } .green { background: #22c55e; } .orange { background: #f97316; }
+.card { background: #161616; border: 1px solid #333; border-radius: 10px; }
+.machines { padding: 6px; width: 100%; }
+.machines .head { display: flex; justify-content: space-between; align-items: center; padding: 6px 8px 8px; font-size: 13px; color: #b5b5b5; font-weight: 500; }
+.row { display: flex; align-items: center; gap: 10px; padding: 7px 8px; border-radius: 6px; font-size: 14px; }
+.row .name { color: #ededed; }
+.row .end { margin-left: auto; display: flex; gap: 14px; align-items: center; color: #d4d4d4; }
+.live { width: 6px; height: 6px; border-radius: 50%; background: #d4d4d4; }
+.off { background: #5a5a5a; }
