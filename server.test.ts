@@ -14,7 +14,7 @@ const connectServers = {
 
 async function loadPlugin() {
   const { bb, harness } = createFakePluginHost({
-    pluginId: "machine-switcher",
+    pluginId: "machine-hop",
     sdk: { plugins: { callRpc: async () => connectServers } },
   });
   await plugin(bb);
@@ -69,7 +69,7 @@ describe("machines_list", () => {
 
   it("surfaces a connect failure as a readable error", async () => {
     const { bb, harness } = createFakePluginHost({
-      pluginId: "machine-switcher",
+      pluginId: "machine-hop",
       sdk: {
         plugins: {
           callRpc: async () => {

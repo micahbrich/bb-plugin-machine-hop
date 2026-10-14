@@ -1,9 +1,9 @@
 ---
-name: machine-switcher
+name: machine-hop
 description: List the user's bb machines (servers on their getbb.app account) and set per-machine nicknames and colours with the `bb machines` CLI. Use when the user asks which machines they have, which one is current, or wants to rename or colour a machine in the sidebar switcher.
 ---
 
-# Machine switcher
+# Machine Hop
 
 `bb machines` reads the same machine list the sidebar switcher shows. The row marked `*` is the machine this bb runs on.
 

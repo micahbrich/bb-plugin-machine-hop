@@ -1,8 +1,8 @@
-# Machine Switcher for bb
+# Machine Hop for bb
 
 Switch between your bb machines in one tap. Desktop, browser, and phone.
 
-If you run bb on more than one computer, you already know the dance: open settings, find the server list, pick one, wait. Machine Switcher puts every machine on your account one tap away, in the same spot on every device.
+If you run bb on more than one computer, you already know the dance: open settings, find the server list, pick one, wait. Machine Hop puts every machine on your account one tap away, in the same spot on every device.
 
 <p align="center">
   <img src="docs/switcher-desktop.jpg" alt="The Machines card open above the sidebar footer, listing Studio, Laptop, and Old Mac with colour dots and a check on the current machine" width="420">
@@ -29,20 +29,20 @@ If you run bb on more than one computer, you already know the dance: open settin
 Every machine installs the same way. Run this on each one:
 
 ```sh
-bb plugin install git:https://github.com/micahbrich/bb-plugin-machine-hop.git@^0.1.0 --yes
+bb plugin install git:https://github.com/micahbrich/bb-plugin-machine-hop.git@^0.2.0 --yes
 ```
 
 Updates arrive as new tags. When one lands:
 
 ```sh
-bb plugin update machine-switcher
+bb plugin update machine-hop
 ```
 
 Git installs build the plugin locally, which needs Node and npm on that machine's PATH.
 
 ## Name your machines
 
-Open **Settings → Installed plugins → Machine Switcher**, or use the CLI:
+Open **Settings → Installed plugins → Machine Hop**, or use the CLI:
 
 ```sh
 bb machines list
@@ -54,7 +54,7 @@ bb machines label mbr --clear
 Colours are `red`, `orange`, `yellow`, `green`, `teal`, `blue`, `purple`, `pink`, or `none`. Names and colours are stored on the machine you set them on, so set them where you look most often.
 
 <p align="center">
-  <img src="docs/switcher-settings.jpg" alt="The Machine Switcher settings page with the mobile deep-link path and a table of machines with nickname inputs and colour pickers" width="760">
+  <img src="docs/switcher-settings.jpg" alt="The Machine Hop settings page with the mobile deep-link path and a table of machines with nickname inputs and colour pickers" width="760">
 </p>
 
 ## How switching works on each device
@@ -91,7 +91,7 @@ bb plugin install . --yes
 - `app.tsx` registers the sidebar footer disclosure, the palette command, and the settings section.
 - `lib/client-bridge.ts` decides how to switch on the current client.
 - `lib/machine.ts` holds the types and constants both sides share. Frontend code must not import values from `server.ts`, because git installs build without dev dependencies and the server's SDK import would not resolve.
-- `skills/machine-switcher/SKILL.md` tells agents the CLI exists.
+- `skills/machine-hop/SKILL.md` tells agents the CLI exists.
 - `docs/mockups/` holds HTML mockups of the screenshots, with made-up machines and projects. Edit them and run `docs/mockups/render.sh` to regenerate the images in `docs/`.
 
 Releases are semver tags. Push a new `vX.Y.Z` for every change, never move an existing tag.
