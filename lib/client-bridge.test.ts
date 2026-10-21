@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { Machine } from "./machine";
-import { detectClient, switchers } from "./client-bridge";
+import { detectClient, openInBrowser, switchers } from "./client-bridge";
 
 const studio: Machine = {
   handle: "studio",
@@ -75,6 +75,28 @@ describe("client bridge", () => {
     globals.bb = { native: { post, capabilities: [] } };
     expect(switchers.mobile(studio, "/settings/general")).toBe(false);
     expect(post).not.toHaveBeenCalled();
+  });
+
+  it("opens a machine in Safari from the mobile app", () => {
+    const post = vi.fn();
+    globals.bb = { native: { post, capabilities: ["open-external", "open-native"] } };
+    openInBrowser(studio);
+    expect(post).toHaveBeenCalledExactlyOnceWith({
+      type: "open-external",
+      url: "https://studio.getbb.app",
+    });
+  });
+
+  it("opens a machine in a new browser window elsewhere", () => {
+    const open = vi.spyOn(window, "open").mockReturnValue(null);
+    globals.bbDesktop = { selectServer: vi.fn() };
+    openInBrowser(studio);
+    expect(open).toHaveBeenCalledExactlyOnceWith(
+      "https://studio.getbb.app",
+      "_blank",
+      "noopener,noreferrer",
+    );
+    open.mockRestore();
   });
 
   it("detects web when neither bridge exists", () => {

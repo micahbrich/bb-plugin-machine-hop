@@ -104,6 +104,16 @@ export const switchers: Record<
   },
 };
 
+// Desktop hands window.open to the system browser; the mobile app hands open-external to Safari.
+export function openInBrowser(machine: Machine): void {
+  const mobile = readMobileBridge();
+  if (mobile?.capabilities.includes("open-external")) {
+    mobile.post({ type: "open-external", url: machine.url });
+    return;
+  }
+  window.open(machine.url, "_blank", "noopener,noreferrer");
+}
+
 export async function switchToMachine(machine: Machine, mobileLinkPath: string): Promise<void> {
   if (!(await switchers[detectClient()](machine, mobileLinkPath))) {
     switchers.web(machine, mobileLinkPath);

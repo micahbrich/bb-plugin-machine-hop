@@ -1,7 +1,7 @@
 import type { ExperimentalSidebarFooterDisclosureProps } from "@get-bb/plugin-sdk/app";
 import { toast } from "sonner";
 import type { Machine } from "../lib/machine";
-import { switchToMachine } from "../lib/client-bridge";
+import { openInBrowser, switchToMachine } from "../lib/client-bridge";
 import { useMachines } from "../hooks/use-machines";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
@@ -9,17 +9,28 @@ import { useIsCompactViewport } from "@/components/ui/hooks/use-compact-viewport
 import { cn } from "@/lib/utils";
 import { MachineDot } from "./machine-dot";
 
+// Harp's ↗ glyph: 9px, 1.4 stroke, round caps.
+function ArrowUpRight() {
+  return (
+    <svg aria-hidden viewBox="0 0 9 9" className="size-[9px]" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M2.5 6.5 6.5 2.5M3.25 2.5H6.5v3.25" />
+    </svg>
+  );
+}
+
 function MachineRow({
   machine,
   compact,
   onSelect,
+  onOpenInBrowser,
 }: {
   machine: Machine;
   compact: boolean;
   onSelect: () => void;
+  onOpenInBrowser: () => void;
 }) {
   return (
-    <li>
+    <li className="group relative">
       <button
         type="button"
         onPointerDown={(event) => {
@@ -48,12 +59,26 @@ function MachineRow({
           className={cn(
             "size-1.5 shrink-0 rounded-full",
             machine.live ? "bg-foreground" : "bg-muted-foreground/40",
+            machine.live &&
+              "group-hover:invisible group-focus-within:invisible [@media(hover:none)]:invisible",
           )}
         />
         <span className="flex size-4 shrink-0 items-center justify-center">
           {machine.isCurrent ? <Icon name="Check" className="size-4" aria-label="current" /> : null}
         </span>
       </button>
+      {machine.live ? (
+        // Sits over the live dot: hover and focus swap it in, touch screens always show it.
+        <button
+          type="button"
+          onClick={onOpenInBrowser}
+          aria-label={`Open ${machine.label} in a browser`}
+          title="Open in browser"
+          className="absolute right-[26px] top-1/2 flex size-[18px] -translate-y-1/2 items-center justify-center rounded-[5px] bg-foreground/[0.06] text-muted-foreground opacity-0 after:absolute after:-inset-2 hover:bg-foreground/10 hover:text-foreground focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group-hover:opacity-100 group-focus-within:opacity-100 [@media(hover:none)]:opacity-100"
+        >
+          <ArrowUpRight />
+        </button>
+      ) : null}
     </li>
   );
 }
@@ -114,6 +139,10 @@ export function MachinesDisclosure({ dismiss }: ExperimentalSidebarFooterDisclos
               machine={machine}
               compact={compact}
               onSelect={() => select(machine, state.mobileLinkPath)}
+              onOpenInBrowser={() => {
+                openInBrowser(machine);
+                dismiss();
+              }}
             />
           ))}
         </ul>

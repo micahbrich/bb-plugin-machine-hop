@@ -10,7 +10,7 @@ If you run bb on more than one computer, you already know the dance: open settin
 
 ## What you get
 
-**A machine list in the sidebar footer.** Tap the monitor icon at the bottom of the sidebar and your machines appear. The one you are on has a check. Live machines have a bright dot, offline ones are dimmed. Tap another machine and you are there.
+**A machine list in the sidebar footer.** Tap the monitor icon at the bottom of the sidebar and your machines appear. The one you are on has a check. Live machines have a bright dot, offline ones are dimmed. Tap another machine and you are there. Want two machines side by side instead? Hover a row and tap ↗ to open that machine in your browser, while bb stays where it is.
 
 **Nicknames and colours.** Handles like `mbr-plexair` are fine for a server. They are not fine at a glance. Give each machine a name and a colour from the plugin's settings page or the command line, and the list reads like your machines, not your DNS.
 

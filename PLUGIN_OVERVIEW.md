@@ -5,7 +5,8 @@ native menus.
 
 - A **Switch machine** button in the sidebar footer. It opens a list of your
   machines with the current one checked, each machine's colour dot, and a
-  live or offline marker. Tap one to switch.
+  live or offline marker. Tap one to switch, or tap ↗ on a live row to
+  open it in your browser alongside this one.
 - A palette command, **Machines: switch machine** (Mod+Alt+M), that opens
   the same list.
 - A `bb machines` command for terminals and agents.
